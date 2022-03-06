@@ -1,12 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const env = require('dotenv')
-const bodyParser = require('body-parser')
 const app = express();
 
 
 
 const userRoutes = require('./routes/auth')
+const adminRoutes = require('./routes/admin/auth')
+const categoryRoutes = require('./routes/category')
 
 // Envorment Varibles 
 env.config()
@@ -19,8 +20,11 @@ mongoose.connect(`mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO
 
 
 
-app.use(bodyParser())
+
+app.use(express.json());
 app.use('/api',userRoutes)
+app.use('/api',adminRoutes)
+app.use('/api',categoryRoutes)
 
 
 app.listen(process.env.PORT, ()=>{

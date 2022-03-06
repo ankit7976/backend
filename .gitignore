@@ -3937,3 +3937,14 @@ node_modules/yallist/LICENSE
 node_modules/yallist/package.json
 node_modules/yallist/README.md
 node_modules/yallist/yallist.js
+package.json
+package-lock.json
+node_modules/slugify/slugify.js
+node_modules/slugify/slugify.d.ts
+node_modules/slugify/README.md
+node_modules/slugify/package.json
+node_modules/slugify/LICENSE
+package.json
+package-lock.json
+package-lock.json
+package.json
