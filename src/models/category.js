@@ -1,3 +1,4 @@
+const { type } = require('express/lib/response')
 const mongoose = require('mongoose')
 
 const categorySchema = new mongoose.Schema({
@@ -11,6 +12,7 @@ const categorySchema = new mongoose.Schema({
         required:true,
         unique:true
     },
+    categoryImage:{type:String},
     parentId : {
         type:String
     }

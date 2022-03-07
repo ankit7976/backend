@@ -32,6 +32,10 @@ exports.addCategory = (req,res)=>{
         slug:slugify(req.body.name)
     }
 
+if(req.file){
+    categoryOBJ.categoryImage = process.env.API + req.file.filename
+}
+
     if(req.body.parentId){
         categoryOBJ.parentId = req.body.parentId
     }
