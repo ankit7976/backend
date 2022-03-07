@@ -5,9 +5,11 @@ const app = express();
 
 
 
-const userRoutes = require('./routes/auth')
-const adminRoutes = require('./routes/admin/auth')
-const categoryRoutes = require('./routes/category')
+const userRoutes = require('./routes/auth');
+const adminRoutes = require('./routes/admin/auth');
+const categoryRoutes = require('./routes/category');
+const ProductRoutes = require('./routes/product');
+const cartRoutes = require('./routes/cart');
 
 // Envorment Varibles 
 env.config()
@@ -25,6 +27,9 @@ app.use(express.json());
 app.use('/api',userRoutes)
 app.use('/api',adminRoutes)
 app.use('/api',categoryRoutes)
+app.use('/api',ProductRoutes)
+app.use('/api',cartRoutes)
+
 
 
 app.listen(process.env.PORT, ()=>{
