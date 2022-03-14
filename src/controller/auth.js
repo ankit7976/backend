@@ -1,20 +1,26 @@
 const User = require('../models/auth')
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt')
 
 exports.signup = (req,res) => {
-    User.findOne({email:req.body.email}).exec((error,user)=>{
-        if(user) return res.status(400).json({message:'email is already registerd'})
-    })
-    const {firstName,lastName,email,password} = req.body;
-    const _user = new User({
-        firstName,lastName,email,password,userName: Math.random()
-    });
+    User.findOne({email:req.body.email}).exec( async (error,user)=>{
+        if(user) return res.status(400).json({message:'email is already registerd'});
 
-    _user.save((error,data)=>{
-        if(error) return res.status(400).json({message:'Somthing went wrong'})
-        if(data) return res.status(201).json({message:'user created sucessfuly'})
+        const {firstName,lastName,email,password} = req.body;
+
+        const hash_password = await bcrypt.hash(password,10)
+        const _user = new User({
+            firstName,lastName,email,hash_password,userName: Math.random()
+        });
+    
+        _user.save((error,data)=>{
+            if(error) return res.status(400).json({message:'Somthing went wrong'})
+            if(data) return res.status(201).json({message:'user created sucessfuly'})
+    
+        })
 
     })
+   
 
 }
 
