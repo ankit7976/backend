@@ -41,17 +41,17 @@ exports.getProductBySlug = (req,res)=>{
         if(err) res.status(400).json({err:err})
         
          if(category){
-              Product.find({category:category._id}).exec((error,product)=>{
+              Product.find({category:category._id}).exec((error,products)=>{
                 if(error) res.status(400).json({error:error})
-                if(product.length > 0) {
+                if(products.length > 0) {
                 res.status(201).json({
-                product,
+                products,
                 productByPrice: {
-                    under5K: product.filter(product=> product.price <= 5000),
-                    under10K: product.filter(product=> product.price > 5000 && product.price <= 10000),
-                    under15K: product.filter(product=> product.price > 10000 && product.price <= 15000),
-                    under20K: product.filter(product=> product.price > 15000 && product.price <= 15000),
-                    under30K: product.filter(product=> product.price > 20000 && product.price <= 30000),
+                    under5K: products.filter(product=> product.price <= 5000),
+                    under10K: products.filter(product=> product.price > 5000 && product.price <= 10000),
+                    under15K: products.filter(product=> product.price > 10000 && product.price <= 15000),
+                    under20K: products.filter(product=> product.price > 15000 && product.price <= 20000),
+                    under30K: products.filter(product=> product.price > 20000 && product.price <= 30000),
                 }    
                 
                 })
