@@ -1,3 +1,4 @@
+const shortid = require("shortid");
 const slugify = require("slugify");
 const Category = require('../models/category');
 
@@ -30,7 +31,7 @@ exports.addCategory = (req, res) => {
 
     const categoryOBJ = {
         name: req.body.name,
-        slug: slugify(req.body.name)
+        slug: `${slugify(req.body.name)}-${shortid.generate()}`
     }
 
     if (req.file) {
