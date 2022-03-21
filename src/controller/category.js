@@ -17,7 +17,9 @@ function createcategories(categories, parentId = null) {
             _id: cate._id,
             name: cate.name,
             slug: cate.slug,
+            type: cate.type,
             parentId: cate.parentId,
+           
             children: createcategories(categories, cate._id)
         });
     }
@@ -31,7 +33,8 @@ exports.addCategory = (req, res) => {
 
     const categoryOBJ = {
         name: req.body.name,
-        slug: `${slugify(req.body.name)}-${shortid.generate()}`
+        slug: `${slugify(req.body.name)}-${shortid.generate()}`,
+        type: req.body.type
     }
 
     if (req.file) {
