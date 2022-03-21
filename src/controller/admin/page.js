@@ -18,11 +18,11 @@ exports.createPage = (req,res)=>{
 
     req.body.createdBy = req.user._id;
     
-    const page = new page(req.body)
+    const page = new Page(req.body)
 page.save((error,page)=>{
    if(error) res.status(400).json({error})
    if(page) res.status(201).json({page})
 })
-    res.status(201).json({body:req.body})
+    
 
 }

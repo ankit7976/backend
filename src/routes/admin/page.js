@@ -3,7 +3,7 @@ const { upload, requireSignin, adminMiddleware } = require('../../common-middlew
 const { createPage } = require('../../controller/admin/page');
 const router = express.Router()
 
-router.post('/page/create', requireSignin, adminMiddleware, upload.fields([
+router.post('/page/create', requireSignin,adminMiddleware, upload.fields([
     {name:'banners'},
     {name:'products'},
 ]), createPage);
