@@ -30,7 +30,7 @@ exports.signin = (req,res)=>{
     .exec((error,user)=>{
         if(error) res.status(400).json({error})
         if(user){
-            if(user.authenticate(req.body.password)){
+            if(user.authenticate(req.body.password) && user.role === 'user'){
 
                 const token = jwt.sign({_id:user._id,role:user.role},process.env.JWT_SECRET,{expiresIn: '1h'})
                 const {firstName,lastName,email,role,fullName} = user
@@ -42,7 +42,7 @@ exports.signin = (req,res)=>{
                 })
             }else{
                 res.status(400).json({
-                    message:"invalid Password"
+                    message:"somthing went wrong...."
                 })
             }
 
