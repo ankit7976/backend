@@ -12,7 +12,8 @@ const categoryRoutes = require('./routes/category');
 const ProductRoutes = require('./routes/product');
 const cartRoutes = require('./routes/cart');
 const initalDataRoutes = require('./routes/admin/initalData');
-const pageRoutes = require('./controller/admin/page');
+const pageRoutes = require('./routes/admin/page');
+const addressRoutes = require('./routes/address')
 // Envorment Varibles 
 env.config()
 
@@ -33,7 +34,8 @@ app.use('/api',categoryRoutes);
 app.use('/api',ProductRoutes);
 app.use('/api',cartRoutes);
 app.use('/api',initalDataRoutes);
-app.use('/api',require('./routes/admin/page'));
+app.use('/api',pageRoutes);
+app.use('/api',addressRoutes);
 
 
 
