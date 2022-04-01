@@ -53,9 +53,6 @@ exports.addItemToCart = (req, res) => {
             .then(response => res.status(201).json({response}))
             .catch(error => res.status(400).json({error}))
 
-
-       
-
         } else {
 
             const cart = new Cart({
