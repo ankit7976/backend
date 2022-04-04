@@ -19,7 +19,6 @@ function createcategories(categories, parentId = null) {
             slug: cate.slug,
             type: cate.type,
             parentId: cate.parentId,
-           
             children: createcategories(categories, cate._id)
         });
     }
@@ -34,11 +33,11 @@ exports.addCategory = (req, res) => {
     const categoryOBJ = {
         name: req.body.name,
         slug: `${slugify(req.body.name)}-${shortid.generate()}`,
-        type: req.body.type
+        createdBy: req.user._id,
     }
 
     if (req.file) {
-        categoryOBJ.categoryImage = process.env.API + req.file.filename
+        categoryOBJ.categoryImage =process.env.API + '/public/' + req.file.filename
     }
 
     if (req.body.parentId) {
@@ -78,12 +77,12 @@ exports.updateCategory = async (req, res) => {
                 category.parentId = parentId[i]
             }
 
-            const updatedCategory = await Category.findByIdAndUpdate({ _id:_id[i] }, category, { new: true })
+            const updatedCategory = await Category.findByIdAndUpdate({ _id: _id[i] }, category, { new: true })
             updatedCategories.push(updatedCategory)
-         
+
         }
 
-        return res.status(201).json({ updateCategories:updatedCategories});
+        return res.status(201).json({ updateCategories: updatedCategories });
     } else {
 
         const category = {
@@ -99,18 +98,18 @@ exports.updateCategory = async (req, res) => {
 }
 
 
-exports.deleteCategories = async (req,res)=>{
-    
-    const {ids} = req.body.payload;
+exports.deleteCategories = async (req, res) => {
+
+    const { ids } = req.body.payload;
     const deletedItems = [];
-    for(let i = 0; i < ids.length; i++){
-        const deleteCategory = await Category.findOneAndDelete({_id:ids[i]._id});
+    for (let i = 0; i < ids.length; i++) {
+        const deleteCategory = await Category.findOneAndDelete({ _id: ids[i]._id });
         deletedItems.push(deleteCategory)
     }
-if(deletedItems.length == ids.length){
-    return res.status(201).json({message : 'Categories removed'})
-}else{
-    return res.status(400).json({message : 'Somthing went wrong'})
-}
-    
+    if (deletedItems.length == ids.length) {
+        return res.status(201).json({ message: 'Categories removed' })
+    } else {
+        return res.status(400).json({ message: 'Somthing went wrong' })
+    }
+
 }
