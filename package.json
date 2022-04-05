@@ -4,7 +4,7 @@
   "description": "this full stack learning project",
   "main": "index.server.js",
   "scripts": {
-    "start": "nodemon ./src/index.server.js"
+    "start": "node ./src/index.server.js"
   },
   "author": "",
   "license": "ISC",
