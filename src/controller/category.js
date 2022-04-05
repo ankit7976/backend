@@ -37,7 +37,7 @@ exports.addCategory = (req, res) => {
     }
 
     if (req.file) {
-        categoryOBJ.categoryImage =process.env.API + '/public/' + req.file.filename
+        categoryOBJ.categoryImage = '/public/' + req.file.filename
     }
 
     if (req.body.parentId) {
