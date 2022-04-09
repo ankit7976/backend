@@ -87,3 +87,16 @@ exports.getProductDetailsById = (req, res) => {
         return res.status(400).json({ error: 'Params Required' })
     }
 }
+
+
+exports.getAllProductAap = async (req,res)=>{
+  
+    const product = await Product.find({})
+    .select('_id name price quantity slug description productPictures category')
+    .exec();
+    res.status(201).json({
+         
+        product,
+        
+    })
+}
