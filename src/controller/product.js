@@ -95,7 +95,7 @@ exports.getAllProductAap = async (req,res)=>{
     const product = await Product.find({})
     .select('_id name price quantity slug description productPictures category')
     .exec();
-    const Category = findOne({_id:product.category}).exec();
+    const Category = findOne({_id:product.category}) .select('name').exec();
 
     product.category = Category.name
     res.status(201).json({
